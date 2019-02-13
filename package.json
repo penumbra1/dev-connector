@@ -4,7 +4,8 @@
   "description": "A social network for developers",
   "main": "server.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpileOnly --require dotenv/config ./server.ts"
+    "dev": "ts-node-dev --respawn --transpileOnly --require dotenv/config ./server.ts",
+    "build": "npx tsc"
   },
   "author": "Olga Isakova",
   "license": "MIT",
