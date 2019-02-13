@@ -1,11 +1,11 @@
-const express = require("express");
-const mongoose = require("mongoose");
+import express from "express";
+import mongoose from "mongoose";
 
 const app = express();
 const db = process.env.MONGO_URI;
 
 app.get("/", (req, res) => {
-  res.send("Hi there!");
+  res.send("Hey there!");
 });
 
 const port = process.env.PORT || 5000;
