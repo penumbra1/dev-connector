@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 const app = express();
 const db = process.env.MONGO_URI;
 
+mongoose.connect(db);
+
 app.get("/", (req, res) => {
   res.send("Hey there!");
 });
