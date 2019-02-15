@@ -5,16 +5,16 @@ const SALT_ROUNDS = 10;
 const DEFAULT_AVATAR =
   "https://res.cloudinary.com/penumbra1/image/upload/v1550234338/default_fb914l.svg";
 
-@pre<User>("save", async function(next) {
+@pre<User>("save", function(next) {
   if (this.isModified("password")) {
-    try {
-      const salt = await bcrypt.genSalt(SALT_ROUNDS);
-      this.password = await bcrypt.hash(this.password, salt);
-    } catch (err) {
-      return next(err);
-    }
+    return bcrypt
+      .genSalt(SALT_ROUNDS)
+      .then(salt => bcrypt.hash(this.password, salt))
+      .then(hashed => {
+        this.password = hashed;
+      })
+      .catch(next);
   }
-  return next();
 })
 class User extends Typegoose {
   @prop({ required: true })
