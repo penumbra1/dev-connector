@@ -1,5 +1,4 @@
 import express from "express";
-import { authenticator } from "../../auth";
 
 // @route  GET api/profile/test
 // @desc Tests the profile route

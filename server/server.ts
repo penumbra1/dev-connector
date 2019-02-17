@@ -1,9 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
-import passport from "passport";
 import bodyParser from "body-parser";
 import errorHandler from "./errorHandler";
-import { jwtStrategy, authenticator } from "./auth";
+import authenticator from "./auth";
 import users from "./routes/api/users";
 import profile from "./routes/api/profile";
 import posts from "./routes/api/posts";
