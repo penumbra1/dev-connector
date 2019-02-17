@@ -9,6 +9,8 @@ Note: pre-save hooks [don't run on update()](https://mongoosejs.com/docs/middlew
 
 [401 is for auth, 403 for permissions](https://stackoverflow.com/questions/50143518), but [401 must come with a WWW-Authenticate header](https://stackoverflow.com/questions/48408530).
 
+[JWT sub](https://tools.ietf.org/html/rfc7519#section-4.1.2)
+
 # Error handling
 
 https://stackoverflow.com/questions/28793098

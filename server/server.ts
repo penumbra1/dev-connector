@@ -1,7 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
+import passport from "passport";
 import bodyParser from "body-parser";
 import errorHandler from "./errorHandler";
+import { jwtStrategy, authenticator } from "./auth";
 import users from "./routes/api/users";
 import profile from "./routes/api/profile";
 import posts from "./routes/api/posts";
@@ -20,17 +22,17 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(authenticator.initialize());
 
 app.get("/", (req, res) => {
   res.send("Hey there!");
 });
 
 app.use("/api/users", users);
-app.use("/api/profile", profile);
+app.use("/api/profile", authenticator.jwt, profile);
 app.use("/api/posts", posts);
 
 app.use(errorHandler);
 
 const { PORT } = process.env;
-
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
