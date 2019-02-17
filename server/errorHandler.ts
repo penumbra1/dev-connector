@@ -1,15 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 
-class ErrorWithStatus extends Error {
-  constructor(
-    message: string = "Server error - please try again or contact us at admin@devconnector.io",
-    status: number = 500
-  ) {
+class ClientError extends Error {
+  constructor(message: string, public status: number) {
     super(message);
     this.status = status;
   }
+}
 
-  status: number;
+interface ErrorWithStatus extends Error {
+  status?: number;
 }
 
 function errorHandler(
@@ -18,9 +17,16 @@ function errorHandler(
   res: Response,
   next: NextFunction
 ) {
-  const { stack, status, message } = err;
+  const { stack, status = 500 } = err;
   console.error(stack);
-  res.status(status).json({ message });
+  if (status === 401) {
+    res.set("WWW-Authenticate", "Bearer");
+  }
+  const errorForClient =
+    status === 500
+      ? "Unexpected error - please try again or reach out to admin@devconnector.io."
+      : err.message;
+  res.status(status).json({ error: errorForClient });
 }
 
-export { ErrorWithStatus, errorHandler as default };
+export { ClientError, errorHandler as default };
