@@ -24,14 +24,21 @@ router.post("/register", async (req, res, next) => {
     return next(new ClientError("E-mail already registered.", 409));
   }
 
+  const newUser = new UserModel({ name, email, avatar, password });
   try {
-    const newUser = new UserModel({ name, email, avatar, password });
-    ({ name, email, avatar } = await newUser.save());
+    await newUser.save();
+    res.status(200).json({ name, email, avatar });
   } catch (e) {
-    return next(new ClientError(e.message, 400));
+    if (e.name === "ValidationError") {
+      const message =
+        "Please provide your " +
+        Object.keys(e.errors)
+          .join(", ")
+          .replace(/, ([^,]*)$/, " and $1");
+      return next(new ClientError(message, 400));
+    }
+    next(e); // Other errors
   }
-
-  res.status(200).json({ name, email, avatar });
 });
 
 // @route  GET api/users/login
