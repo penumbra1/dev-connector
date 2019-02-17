@@ -1,8 +1,8 @@
 import express from "express";
 import UserModel from "../../models/User";
-import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { ClientError } from "../../errorHandler";
+import authenticator from "../../auth";
 
 const router = express.Router();
 
@@ -37,16 +37,8 @@ router.post("/register", async (req, res, next) => {
 // @route  GET api/users/login
 // @desc Logs the user in, returns a JWT
 // @access Public
-router.post("/login", async (req, res, next) => {
-  const { email, password } = req.body;
-
-  const user = await UserModel.findOne({ email });
-  const isMatch = user && (await bcrypt.compare(password, user.password));
-  if (!user || !isMatch) {
-    return next(new ClientError("Incorrect credentials.", 401));
-  }
-
-  const payload = { sub: user.id };
+router.post("/login", authenticator.local, async (req, res, next) => {
+  const payload = { sub: req.user };
   const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: "1h" });
   res.status(200).json({ token });
 });
