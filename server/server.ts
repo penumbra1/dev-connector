@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import bodyParser from "body-parser";
+import helmet from "helmet";
 import errorHandler from "./errorHandler";
 import authenticator from "./auth";
 import users from "./routes/api/users";
@@ -19,8 +19,9 @@ if (db) {
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(helmet());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(authenticator.initialize());
 
 app.get("/", (req, res) => {
