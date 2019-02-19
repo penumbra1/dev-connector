@@ -1,4 +1,4 @@
-import { prop, pre, Typegoose, InstanceType, staticMethod } from "typegoose";
+import { prop, pre, Typegoose } from "typegoose";
 import bcrypt from "bcryptjs";
 
 const SALT_ROUNDS = 10;
@@ -20,10 +20,16 @@ class User extends Typegoose {
   @prop({ required: true })
   name: string;
 
-  @prop({ required: true })
+  @prop({
+    required: true,
+    match: [/\S+@\S+/, "An e-mail must contain a @."]
+  })
   email: string;
 
-  @prop({ required: true })
+  @prop({
+    required: true,
+    minlength: [8, "Password must be at least 8 characters."]
+  })
   password: string;
 
   @prop({ default: Date.now })

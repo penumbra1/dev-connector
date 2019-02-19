@@ -13,7 +13,7 @@ const jwtOptions = {
 const jwtStrategy = new JwtStrategy(
   jwtOptions,
   ({ sub }, done) =>
-    UserModel.findById(sub)
+    UserModel.findById(sub) // TODO: move this to actual route handlers for perf
       .then(user => done(null, user))
       .catch(done) // Server-side error
 );
@@ -32,8 +32,8 @@ const localStrategy = new LocalStrategy(
 );
 
 // If auth fails, passport sends a 401 to the client, bypassing other middleware.
-// To send errors to the error handling middleware via next(),
-// passport.authenticate needs a request handler closure.
+// To send errors to the error handler via next(),
+// passport.authenticate needs a closure with (req, res, next).
 const authenticate = (
   strategy: string,
   options: passport.AuthenticateOptions,
@@ -41,8 +41,7 @@ const authenticate = (
 ) => (req: Request, res: Response, next: NextFunction) =>
   passport.authenticate(strategy, options, (err, user) => {
     if (err) {
-      // Server-side error
-      return next(err);
+      return next(err); // Server-side error
     }
     if (!user) {
       return next(new ClientError(message, 401));
@@ -57,8 +56,16 @@ const authenticator = {
     passport.use("local", localStrategy);
     return passport.initialize();
   },
-  jwt: authenticate("jwt", { session: false }, "Invalid authentication token"),
-  local: authenticate("local", { session: false }, "Invalid credentials")
+  jwt: authenticate(
+    "jwt",
+    { session: false },
+    "Invalid authentication token; please log out and back in again."
+  ),
+  local: authenticate(
+    "local",
+    { session: false },
+    "Your username and password do not match."
+  )
 };
 
 export default authenticator;

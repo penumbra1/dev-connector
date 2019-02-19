@@ -1,6 +1,7 @@
 import express from "express";
-import UserModel from "../../models/User";
+import sanitize from "mongo-sanitize";
 import jwt from "jsonwebtoken";
+import UserModel from "../../models/User";
 import { ClientError } from "../../errorHandler";
 import authenticator from "../../auth";
 
@@ -16,6 +17,12 @@ router.get("/test", (req, res) => res.json({ message: "Users route works" }));
 // @access Public
 router.post("/register", async (req, res, next) => {
   let { name, email, avatar, password } = req.body;
+  ({ name, email, avatar, password } = sanitize({
+    name,
+    email,
+    avatar,
+    password
+  }));
   const user = await UserModel.findOne({ email });
   if (user) {
     // 409 Conflict
@@ -29,15 +36,27 @@ router.post("/register", async (req, res, next) => {
     await newUser.save();
     res.status(200).json({ name, email, avatar });
   } catch (e) {
-    if (e.name === "ValidationError") {
+    if (e.name !== "ValidationError") {
+      next(e);
+    }
+    const errorKeys = Object.keys(e.errors);
+    const requiredKeys = errorKeys.filter(
+      key => e.errors[key].kind === "required"
+    );
+    if (requiredKeys.length > 0) {
       const message =
         "Please provide your " +
-        Object.keys(e.errors)
-          .join(", ")
-          .replace(/, ([^,]*)$/, " and $1");
-      return next(new ClientError(message, 400));
+        requiredKeys.join(", ").replace(/, ([^,]*)$/, " and $1");
+      return next(new ClientError(message, 422));
     }
-    next(e); // Other errors
+
+    const invalidMessages = errorKeys
+      .filter(key => e.errors[key].kind !== "required")
+      .map(key => e.errors[key].message);
+    if (invalidMessages) {
+      const message = invalidMessages.join(" ");
+      return next(new ClientError(message, 422));
+    }
   }
 });
 
