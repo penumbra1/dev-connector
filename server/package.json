@@ -32,9 +32,15 @@
     "@types/passport": "^1.0.0",
     "@types/passport-jwt": "^3.0.1",
     "@types/passport-local": "^1.0.33",
+    "@typescript-eslint/eslint-plugin": "^1.4.0",
+    "@typescript-eslint/parser": "^1.4.0",
+    "eslint": "^5.14.1",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-security": "^1.4.0",
+    "prettier": "^1.16.4",
     "reflect-metadata": "^0.1.13",
     "ts-node-dev": "^1.0.0-pre.32",
-    "tslint": "^5.12.1",
     "typegoose": "^5.5.0",
     "typescript": "^3.3.3"
   }

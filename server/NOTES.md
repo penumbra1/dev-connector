@@ -13,7 +13,7 @@ NoSQL injection: some say [Mongoose schema typing are enough](https://zanon.io/p
 
 [401 is for auth, 403 for permissions](https://stackoverflow.com/questions/50143518), but [401 must come with a WWW-Authenticate header](https://stackoverflow.com/questions/48408530).
 
-[JWT sub](https://tools.ietf.org/html/rfc7519#section-4.1.2)
+[JWT sub](https://tools.ietf.org/html/rfc7519#section-4.1.2) carries a user id from Mongo.
 
 JWT strategy: there is no need to query the DB for the user during verification. Token payload can be passed to other handlers that will query the DB if needed => better perf. Invalidate the token on ban/deletion instead of on re-checking the user in the DB on every request.
 

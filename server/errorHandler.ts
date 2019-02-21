@@ -1,22 +1,25 @@
 import { Request, Response, NextFunction } from "express";
 
 class ClientError extends Error {
-  constructor(message: string, public status: number) {
+  public constructor(message: string, status: number) {
     super(message);
     this.status = status;
   }
+
+  public status: number;
 }
 
 interface ErrorWithStatus extends Error {
   status?: number;
 }
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 function errorHandler(
   err: ErrorWithStatus,
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): void {
   const { stack, status = 500 } = err;
   console.error(stack);
   if (status === 401) {

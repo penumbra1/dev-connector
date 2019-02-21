@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import { prop, pre, Typegoose } from "typegoose";
 import bcrypt from "bcryptjs";
 

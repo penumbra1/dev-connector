@@ -1,3 +1,6 @@
+/* eslint-disable security/detect-object-injection */
+// See https://github.com/nodesecurity/eslint-plugin-security/issues/21
+
 import express from "express";
 import sanitize from "mongo-sanitize";
 import jwt from "jsonwebtoken";
@@ -65,8 +68,13 @@ router.post("/register", async (req, res, next) => {
 // @access Public
 router.post("/login", authenticator.local, async (req, res, next) => {
   const payload = { sub: req.user };
-  const token = jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: "1h" });
-  res.status(200).json({ token });
+  const secret = process.env.JWT_SECRET;
+  if (secret) {
+    const token = jwt.sign(payload, secret, { expiresIn: "1h" });
+    res.status(200).json({ token });
+  } else {
+    next(new Error("JWT secret not found."));
+  }
 });
 
 export default router;
