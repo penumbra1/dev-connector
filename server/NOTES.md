@@ -2,7 +2,7 @@
 
 Requires setting `"strictPropertyInitialization": false` in tsconfig - [see issue](https://github.com/szokodiakos/typegoose/issues/210).
 
-String transformations on schema props are still [awaiting release](https://github.com/szokodiakos/typegoose/commit/714135b01320e0c030113493914340af57962f10).
+String transformations on schema props are still [awaiting release](https://github.com/szokodiakos/typegoose/commit/714135b01320e0c030113493914340af57962f10). I added a GitHub dependency for now.
 
 Pre-save hook inspired by [this answer](https://stackoverflow.com/a/53431995).
 Note: pre-save hooks [don't run on update()](https://mongoosejs.com/docs/middleware.html#notes). I'm using find() and save(), as save() is performant enough due to diffing.
@@ -22,3 +22,5 @@ JWT strategy: there is no need to query the DB for the user during verification.
 https://stackoverflow.com/questions/28793098
 https://wanago.io/2018/12/17/typescript-express-error-handling-validation/
 https://gist.github.com/zcaceres/2854ef613751563a3b506fabce4501fd
+
+__TODO__: error messages in JSON by fields.

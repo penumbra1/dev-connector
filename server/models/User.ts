@@ -44,4 +44,4 @@ class User extends Typegoose {
 
 const UserModel = new User().getModelForClass(User);
 
-export default UserModel;
+export { User, UserModel as default };

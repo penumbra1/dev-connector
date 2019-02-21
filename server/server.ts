@@ -1,7 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import helmet from "helmet";
-import errorHandler from "./errorHandler";
+import {
+  logger,
+  validationErrorHandler,
+  clientErrorHandler,
+  serverErrorHandler
+} from "./errors";
 import authenticator from "./auth";
 import users from "./routes/api/users";
 import profile from "./routes/api/profile";
@@ -32,7 +37,10 @@ app.use("/api/users", users);
 app.use("/api/profile", authenticator.jwt, profile);
 app.use("/api/posts", posts);
 
-app.use(errorHandler);
+app.use(logger);
+app.use(validationErrorHandler);
+app.use(clientErrorHandler);
+app.use(serverErrorHandler);
 
 const { PORT } = process.env;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

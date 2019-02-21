@@ -1,15 +1,17 @@
+import { Request, Response, NextFunction, RequestHandler } from "express";
 import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcryptjs";
-import { Request, Response, NextFunction } from "express";
 import UserModel from "./models/User";
-import { ClientError } from "./errorHandler";
+import { AuthenticationError } from "./errors";
 
+const secret = process.env.JWT_SECRET;
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET!
+  secretOrKey: secret
 };
+
 const jwtStrategy = new JwtStrategy(
   jwtOptions,
   ({ sub }, done) =>
@@ -31,20 +33,22 @@ const localStrategy = new LocalStrategy(
   }
 );
 
-// If auth fails, passport sends a 401 to the client, bypassing other middleware.
+// Passport returns err only if authenticate() failed to execute.
+// If it ran but the credentials were wrong, err is null, user is false,
+// and Passport sends a 401 to the client, bypassing other middleware.
 // To send errors to the error handler via next(),
 // passport.authenticate needs a closure with (req, res, next).
 const authenticate = (
   strategy: string,
-  options: passport.AuthenticateOptions,
-  message: string
-) => (req: Request, res: Response, next: NextFunction) =>
+  errorMessage: string,
+  options: passport.AuthenticateOptions = { session: false }
+): RequestHandler => (req: Request, res: Response, next: NextFunction) =>
   passport.authenticate(strategy, options, (err, user) => {
     if (err) {
       return next(err); // Server-side error
     }
     if (!user) {
-      return next(new ClientError(message, 401));
+      return next(new AuthenticationError({ error: errorMessage }));
     }
     req.user = user.id;
     next();
@@ -58,14 +62,9 @@ const authenticator = {
   },
   jwt: authenticate(
     "jwt",
-    { session: false },
-    "Invalid authentication token; please log out and back in again."
+    "Invalid authentication token: please log out and back in again."
   ),
-  local: authenticate(
-    "local",
-    { session: false },
-    "Your username and password do not match."
-  )
+  local: authenticate("local", "Your email and password do not match.")
 };
 
 export default authenticator;

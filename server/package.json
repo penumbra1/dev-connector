@@ -2,7 +2,7 @@
   "name": "dev-connector",
   "version": "1.0.0",
   "description": "A social network for developers",
-  "main": "server.js",
+  "main": "dist/server.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpileOnly --require dotenv/config ./server.ts",
     "build": "npx tsc"
