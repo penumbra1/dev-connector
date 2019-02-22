@@ -1,14 +1,22 @@
+/* eslint-disable security/detect-object-injection */
+// See https://github.com/nodesecurity/eslint-plugin-security/issues/21
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { Request, Response, NextFunction } from "express";
+import mongoose from "mongoose";
 
 interface ClientErrorPayload {
   [key: string]: string;
 }
 
 class ClientError {
-  public constructor(errors: ClientErrorPayload, status?: number) {
-    this.errors = errors;
+  public constructor(errors: {} | string, status?: number) {
+    if (typeof errors === "string") {
+      this.errors = { error: errors };
+    } else {
+      this.errors = errors;
+    }
+
     this.status = status || 400;
   }
 
@@ -30,9 +38,17 @@ function validationErrorHandler(
   res: Response,
   next: NextFunction
 ): void {
-  if (err instanceof ValidationError) {
-    console.log("Validation error");
-    // 422 errors here
+  if (err instanceof mongoose.Error.ValidationError) {
+    // Extract and clean up error messages for the client
+    const errorsForClient: ClientErrorPayload = {};
+    for (let key of Object.keys(err.errors)) {
+      if (err.errors[key].kind === "required") {
+        errorsForClient[key] = `Please provide your ${err.errors[key].path}`;
+      } else {
+        errorsForClient[key] = err.errors[key].message;
+      }
+    }
+    next(new ValidationError(errorsForClient));
   } else {
     next(err);
   }
@@ -45,7 +61,6 @@ function clientErrorHandler(
   next: NextFunction
 ): void {
   if (err instanceof ClientError) {
-    console.log("Client error");
     const { status } = err;
     if (status === 401) {
       res.set("WWW-Authenticate", "Bearer");

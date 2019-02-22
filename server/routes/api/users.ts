@@ -19,48 +19,30 @@ router.get("/test", (req, res) => res.json({ message: "Users route works" }));
 // @desc Regsiters the user
 // @access Public
 router.post("/register", async (req, res, next) => {
-  let { name, email, avatar, password } = req.body;
-  ({ name, email, avatar, password } = sanitize({
-    name,
-    email,
-    avatar,
-    password
-  }));
-  const user = await UserModel.findOne({ email });
-  if (user) {
-    // 409 Conflict
-    // Note: user enumeration vulnerability
-    // https://stackoverflow.com/questions/9269040
-    return next(new ClientError({ email: "E-mail already registered." }, 409));
-  }
-
-  const newUser = new UserModel({ name, email, avatar, password });
   try {
+    let { name, email, avatar, password } = req.body;
+    ({ name, email, avatar, password } = sanitize({
+      name,
+      email,
+      avatar,
+      password
+    }));
+
+    const user = await UserModel.findOne({ email });
+    if (user) {
+      // 409 Conflict
+      // Note: user enumeration vulnerability
+      // https://stackoverflow.com/questions/9269040
+      return next(
+        new ClientError({ email: "E-mail already registered." }, 409)
+      );
+    }
+
+    const newUser = new UserModel({ name, email, avatar, password });
     await newUser.save();
     res.status(200).json({ name, email, avatar });
   } catch (e) {
     next(e);
-    // if (e.name !== "ValidationError") {
-    //   next(e);
-    // }
-    // const errorKeys = Object.keys(e.errors);
-    // const requiredKeys = errorKeys.filter(
-    //   key => e.errors[key].kind === "required"
-    // );
-    // if (requiredKeys.length > 0) {
-    //   const message =
-    //     "Please provide your " +
-    //     requiredKeys.join(", ").replace(/, ([^,]*)$/, " and $1");
-    //   return next(new ClientError(message, 422));
-    // }
-
-    // const invalidMessages = errorKeys
-    //   .filter(key => e.errors[key].kind !== "required")
-    //   .map(key => e.errors[key].message);
-    // if (invalidMessages) {
-    //   const message = invalidMessages.join(" ");
-    //   return next(new ClientError(message, 422));
-    // }
   }
 });
 

@@ -15,12 +15,25 @@ NoSQL injection: some say [Mongoose schema typing are enough](https://zanon.io/p
 
 [JWT sub](https://tools.ietf.org/html/rfc7519#section-4.1.2) carries a user id from Mongo.
 
-JWT strategy: there is no need to query the DB for the user during verification. Token payload can be passed to other handlers that will query the DB if needed => better perf. Invalidate the token on ban/deletion instead of on re-checking the user in the DB on every request.
+## Passport
+... Is a mess if I want to report errors by field.
+
+__Local strategy__
+
+If any field is missing, the strategy callback doesn't execute at all. I have to check for missing credentials in req.body manually.
+If credentials are provided but don't match, the strategy runs as specified.
+In both cases, by default passport sends a 401 (and an ugly error) to the client, bypassing other middleware.
+
+To clean up error messages and pass them to next(), I wrap passport.authenticate in a closure with (req, res, next) and provide a custom callback.
+
+__JWT strategy__
+
+Unlike local strategy, if the token is missing, the callback runs with an error as the info parameter. If the token is invalid, the error is an JsonWebTokenError. If no token is provided, it's a plain Error. Again, I need a custom callback.
+
+There is no need to query the DB for the user during verification. Token payload can be passed to other handlers that will query the DB if needed => better perf. Invalidate the token on ban/deletion instead of on re-checking the user in the DB on every request.
 
 # Error handling
 
 https://stackoverflow.com/questions/28793098
 https://wanago.io/2018/12/17/typescript-express-error-handling-validation/
 https://gist.github.com/zcaceres/2854ef613751563a3b506fabce4501fd
-
-__TODO__: error messages in JSON by fields.

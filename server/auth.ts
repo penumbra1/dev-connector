@@ -1,10 +1,10 @@
-import { Request, Response, NextFunction, RequestHandler } from "express";
+import { Request, Response, NextFunction } from "express";
 import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcryptjs";
 import UserModel from "./models/User";
-import { AuthenticationError } from "./errors";
+import { AuthenticationError, ValidationError } from "./errors";
 
 const secret = process.env.JWT_SECRET;
 const jwtOptions = {
@@ -12,47 +12,29 @@ const jwtOptions = {
   secretOrKey: secret
 };
 
-const jwtStrategy = new JwtStrategy(
-  jwtOptions,
-  ({ sub }, done) =>
-    UserModel.findById(sub) // TODO: move this to actual route handlers for perf
-      .then(user => done(null, user))
-      .catch(done) // Server-side error
+// Note: there is no need to check if the user exists here (which is a perf hit).
+// A user who provides a valid token definitely exists (has logged in before).
+// If a user is deleted, all their tokens must be revoked.
+const jwtStrategy = new JwtStrategy(jwtOptions, ({ sub }, done) =>
+  done(null, sub)
 );
 
 const localStrategy = new LocalStrategy(
-  { usernameField: "email" },
+  {
+    usernameField: "email"
+  },
   async (email, password, done) => {
     try {
       const user = await UserModel.findOne({ email });
       const match = user && (await bcrypt.compare(password, user.password));
-      return done(null, match && user);
+      return done(null, match && user, {
+        message: "Your email and password do not match."
+      });
     } catch (e) {
       done(e); // Server-side error
     }
   }
 );
-
-// Passport returns err only if authenticate() failed to execute.
-// If it ran but the credentials were wrong, err is null, user is false,
-// and Passport sends a 401 to the client, bypassing other middleware.
-// To send errors to the error handler via next(),
-// passport.authenticate needs a closure with (req, res, next).
-const authenticate = (
-  strategy: string,
-  errorMessage: string,
-  options: passport.AuthenticateOptions = { session: false }
-): RequestHandler => (req: Request, res: Response, next: NextFunction) =>
-  passport.authenticate(strategy, options, (err, user) => {
-    if (err) {
-      return next(err); // Server-side error
-    }
-    if (!user) {
-      return next(new AuthenticationError({ error: errorMessage }));
-    }
-    req.user = user.id;
-    next();
-  })(req, res, next);
 
 const authenticator = {
   initialize() {
@@ -60,11 +42,43 @@ const authenticator = {
     passport.use("local", localStrategy);
     return passport.initialize();
   },
-  jwt: authenticate(
-    "jwt",
-    "Invalid authentication token: please log out and back in again."
-  ),
-  local: authenticate("local", "Your email and password do not match.")
+  jwt: (req: Request, res: Response, next: NextFunction) =>
+    passport.authenticate("jwt", { session: false }, (err, user, info) => {
+      if (err) {
+        return next(err); // Server-side error
+      }
+      if (!user && info) {
+        // Info contains the error object - both if token was not provided
+        // and if the provided token was invalid
+        return next(
+          new AuthenticationError(
+            "Invalid authentication token: please log out and back in again."
+          )
+        );
+      }
+      req.user = user.id;
+      next();
+    })(req, res, next),
+  local: (req: Request, res: Response, next: NextFunction) =>
+    passport.authenticate("local", { session: false }, (err, user, info) => {
+      if (err) {
+        return next(err); // Server-side error
+      }
+      // Check for missing credentials - otherwise Passport will fail silently
+      const { email, password } = req.body;
+      if (!email || !password) {
+        const errorsForClient = {
+          ...(!email && { email: "Please provide your email" }),
+          ...(!password && { password: "Please provide your password" })
+        };
+        return next(new ValidationError(errorsForClient));
+      }
+      if (!user) {
+        return next(new AuthenticationError(info.message));
+      }
+      req.user = user.id;
+      next();
+    })(req, res, next)
 };
 
 export default authenticator;
