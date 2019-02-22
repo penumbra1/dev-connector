@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", users);
-app.use("/api/profile", authenticator.jwt, profile);
+app.use("/api/profile", profile);
 app.use("/api/posts", posts);
 
 app.use(logger);

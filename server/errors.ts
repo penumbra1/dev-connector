@@ -17,7 +17,7 @@ class ClientError {
       this.errors = errors;
     }
 
-    this.status = status || 400;
+    this.status = status || 404;
   }
 
   public errors: ClientErrorPayload;

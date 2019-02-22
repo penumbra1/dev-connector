@@ -56,7 +56,8 @@ const authenticator = {
           )
         );
       }
-      req.user = user.id;
+
+      req.user = user; // user is the data encoded in the token (i.e. the id)
       next();
     })(req, res, next),
   local: (req: Request, res: Response, next: NextFunction) =>

@@ -80,18 +80,6 @@ class Profile extends Typegoose {
   @prop({ required: true, maxlength: 40 })
   handle: string;
 
-  @prop()
-  company?: string;
-
-  @prop()
-  website?: string;
-
-  @prop()
-  location?: string;
-
-  @prop({ required: true, enum: JobStatus })
-  JobStatus: JobStatus;
-
   @arrayProp({ items: String })
   skills?: string[];
 
@@ -99,7 +87,13 @@ class Profile extends Typegoose {
   bio?: string;
 
   @prop()
-  github?: string;
+  company?: string;
+
+  @prop()
+  location?: string;
+
+  @prop({ required: true, enum: JobStatus })
+  status: JobStatus;
 
   @arrayProp({ items: Job })
   experience?: Job[];
@@ -107,8 +101,14 @@ class Profile extends Typegoose {
   @arrayProp({ items: Degree })
   education?: Degree[];
 
+  @prop()
+  website?: string;
+
+  @prop()
+  github?: string;
+
   @arrayProp({ items: Social })
-  social: Social[];
+  social?: Social[];
 }
 
 const ProfileModel = new Profile().getModelForClass(Profile);
