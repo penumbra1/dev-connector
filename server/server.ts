@@ -15,7 +15,7 @@ import posts from "./routes/api/posts";
 const db = process.env.MONGO_URI;
 if (db) {
   mongoose
-    .connect(db, { useNewUrlParser: true })
+    .connect(db, { useNewUrlParser: true, useCreateIndex: true })
     .then(() => {
       console.log("MongoDB connected");
     })
@@ -37,9 +37,9 @@ app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/posts", posts);
 
-app.use(logger);
 app.use(validationErrorHandler);
 app.use(clientErrorHandler);
+app.use(logger);
 app.use(serverErrorHandler);
 
 const { PORT } = process.env;

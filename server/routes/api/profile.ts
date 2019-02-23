@@ -19,7 +19,6 @@ router.get("/", authenticator.jwt, (req, res, next) => {
     if (!profile) {
       return next(new ClientError("Profile not found"));
     }
-    console.log(profile);
     res.send(profile);
   });
 });
@@ -45,11 +44,12 @@ router.post("/", authenticator.jwt, async (req, res, next) => {
 
     let profile = await ProfileModel.findOne({ user: req.user });
     if (profile) {
-      console.log("Updating");
+      // Update an existing profile
       Object.assign(profile, profileData);
-      await profile.save();
+      await profile.save(); // Using save instead of update to get validation
     } else {
-      profile = new ProfileModel(profileData);
+      // Create a new profile
+      profile = await ProfileModel.create(profileData);
     }
     res.json(profile);
   } catch (e) {

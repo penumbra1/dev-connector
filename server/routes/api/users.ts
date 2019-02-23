@@ -31,7 +31,7 @@ router.post("/register", async (req, res, next) => {
     const user = await UserModel.findOne({ email });
     if (user) {
       // 409 Conflict
-      // Note: user enumeration vulnerability
+      // Note: enumeration vulnerability - perhaps use 200 + email confirmation
       // https://stackoverflow.com/questions/9269040
       return next(
         new ClientError({ email: "E-mail already registered." }, 409)
@@ -40,7 +40,7 @@ router.post("/register", async (req, res, next) => {
 
     const newUser = new UserModel({ name, email, avatar, password });
     await newUser.save();
-    res.status(200).json({ name, email, avatar });
+    res.json({ name, email, avatar });
   } catch (e) {
     next(e);
   }

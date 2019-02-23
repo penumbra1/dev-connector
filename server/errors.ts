@@ -17,7 +17,7 @@ class ClientError {
       this.errors = errors;
     }
 
-    this.status = status || 404;
+    this.status = status || 400;
   }
 
   public errors: ClientErrorPayload;
@@ -26,10 +26,6 @@ class ClientError {
 
 class AuthenticationError extends ClientError {
   public status: number = 401;
-}
-
-class ValidationError extends ClientError {
-  public status: number = 422;
 }
 
 function validationErrorHandler(
@@ -42,13 +38,20 @@ function validationErrorHandler(
     // Extract and clean up error messages for the client
     const errorsForClient: ClientErrorPayload = {};
     for (let key of Object.keys(err.errors)) {
-      if (err.errors[key].kind === "required") {
-        errorsForClient[key] = `Please provide your ${err.errors[key].path}`;
-      } else {
-        errorsForClient[key] = err.errors[key].message;
+      const { path, kind, message } = err.errors[key];
+      switch (kind) {
+        case "required":
+          errorsForClient[key] = `Please provide your ${path}`;
+          break;
+        case "unique":
+          errorsForClient[key] = `This ${path} is already taken.`;
+          break;
+        default:
+          errorsForClient[key] = message;
+          break;
       }
     }
-    next(new ValidationError(errorsForClient));
+    next(new ClientError(errorsForClient));
   } else {
     next(err);
   }
@@ -99,7 +102,6 @@ function logger(
 export {
   AuthenticationError,
   ClientError,
-  ValidationError,
   validationErrorHandler,
   clientErrorHandler,
   serverErrorHandler,

@@ -4,7 +4,7 @@ import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcryptjs";
 import UserModel from "./models/User";
-import { AuthenticationError, ValidationError } from "./errors";
+import { AuthenticationError, ClientError } from "./errors";
 
 const secret = process.env.JWT_SECRET;
 const jwtOptions = {
@@ -72,7 +72,7 @@ const authenticator = {
           ...(!email && { email: "Please provide your email" }),
           ...(!password && { password: "Please provide your password" })
         };
-        return next(new ValidationError(errorsForClient));
+        return next(new ClientError(errorsForClient));
       }
       if (!user) {
         return next(new AuthenticationError(info.message));
