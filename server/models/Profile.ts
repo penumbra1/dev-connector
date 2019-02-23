@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
-import { Typegoose, prop, arrayProp, Ref } from "typegoose";
+import { arrayProp, plugin, prop, Ref, Typegoose } from "typegoose";
+import uniqueValidator from "mongoose-unique-validator";
+
 import { User } from "./User";
 
 enum JobStatus {
@@ -73,11 +75,12 @@ class Degree extends Typegoose {
   description?: string;
 }
 
+@plugin(uniqueValidator)
 class Profile extends Typegoose {
   @prop({ required: true, ref: User })
   user: Ref<User>;
 
-  @prop({ required: true, maxlength: 40 })
+  @prop({ required: true, unique: true, maxlength: 40 })
   handle: string;
 
   @arrayProp({ items: String })
