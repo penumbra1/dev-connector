@@ -1,6 +1,7 @@
 {
   "name": "dev-connector-root",
   "version": "1.0.0",
+  "private": true,
   "description": "A social network for developers ",
   "main": "index.js",
   "scripts": {
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/penumbra1/dev-connector#readme",
   "devDependencies": {
-    "lerna": "^3.13.1"
+    "lerna": "^3.13.1",
+    "lerna-update-wizard": "^0.11.1"
   }
 }
