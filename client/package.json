@@ -1,6 +1,6 @@
 {
   "name": "dev-connector-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "A social network for developers",
   "main": "index.js",
