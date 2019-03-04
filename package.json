@@ -1,0 +1,22 @@
+{
+  "name": "dev-connector-root",
+  "version": "1.0.0",
+  "description": "A social network for developers ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/penumbra1/dev-connector.git"
+  },
+  "author": "Olga Isakova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/penumbra1/dev-connector/issues"
+  },
+  "homepage": "https://github.com/penumbra1/dev-connector#readme",
+  "devDependencies": {
+    "lerna": "^3.13.1"
+  }
+}

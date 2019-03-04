@@ -38,6 +38,12 @@ function validationErrorHandler(
     // Extract and clean up error messages for the client
     const errorsForClient: ClientErrorPayload = {};
     for (let key of Object.keys(err.errors)) {
+      // Errors on the child schema are reported twice: as a ValidatorError
+      // on the child key and a ValidationError on the parent key (see NOTES).
+      // Normally errors in the err.errors hash are of type ValidatorError.
+      // Ignore nested ValidationErrors to ignore duplicates on the parent.
+      if (err.errors[key] instanceof mongoose.Error.ValidationError) continue;
+
       const { path, kind, message } = err.errors[key];
       switch (kind) {
         case "required":
@@ -64,11 +70,15 @@ function clientErrorHandler(
   next: NextFunction
 ): void {
   if (err instanceof ClientError) {
+    // A ClientError thrown explicitly
     const { status } = err;
     if (status === 401) {
       res.set("WWW-Authenticate", "Bearer");
     }
     res.status(status).json(err.errors);
+  } else if (err instanceof SyntaxError) {
+    // Invalid JSON caught by the Express json parser
+    res.status(400).json({ json: err.message });
   } else {
     next(err);
   }

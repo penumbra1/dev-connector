@@ -1,6 +1,7 @@
 {
-  "name": "dev-connector",
+  "name": "dev-connector-api",
   "version": "1.0.0",
+  "private": true,
   "description": "A social network for developers",
   "main": "dist/server.js",
   "scripts": {
@@ -14,13 +15,14 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "helmet": "^3.15.1",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^8.5.0",
     "mongo-sanitize": "^1.0.1",
-    "mongoose": "^5.4.14",
+    "mongoose": "^5.4.17",
     "mongoose-unique-validator": "^2.0.2",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "validator": "^10.11.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -28,12 +30,13 @@
     "@types/helmet": "0.0.42",
     "@types/jsonwebtoken": "^8.3.0",
     "@types/mongo-sanitize": "^1.0.0",
-    "@types/mongoose": "^5.3.17",
+    "@types/mongoose": "^5.3.20",
     "@types/mongoose-unique-validator": "^1.0.1",
-    "@types/node": "^11.9.4",
+    "@types/node": "^11.10.4",
     "@types/passport": "^1.0.0",
     "@types/passport-jwt": "^3.0.1",
     "@types/passport-local": "^1.0.33",
+    "@types/validator": "^10.9.0",
     "@typescript-eslint/eslint-plugin": "^1.4.0",
     "@typescript-eslint/parser": "^1.4.0",
     "eslint": "^5.14.1",
@@ -43,7 +46,7 @@
     "prettier": "^1.16.4",
     "reflect-metadata": "^0.1.13",
     "ts-node-dev": "^1.0.0-pre.32",
-    "typegoose": "^5.5.0",
+    "typegoose": "^5.6.0",
     "typescript": "^3.3.3"
   }
 }

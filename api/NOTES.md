@@ -1,21 +1,33 @@
 # Mongoose & Typegoose
 
+__Config__
+
 Requires setting `"strictPropertyInitialization": false` in tsconfig - [see issue](https://github.com/szokodiakos/typegoose/issues/210).
 
 Mongoose calls a deprecated Mongo method when dealing with indexes. To avoid deprecation warnings, I set `{useCreateIndex: true}` ([fix](https://github.com/Automattic/mongoose/issues/6890#issuecomment-416218953), [docs](https://mongoosejs.com/docs/deprecations.html)).
+
+__Typegoose decorators__
 
 String transformations on schema props are still [awaiting release](https://github.com/szokodiakos/typegoose/commit/714135b01320e0c030113493914340af57962f10).
 
 Pre-save hook inspired by [this answer](https://stackoverflow.com/a/53431995).
 Note: pre-save hooks [don't run on update()](https://mongoosejs.com/docs/middleware.html#notes). I'm using find() and save(), as save() is performant enough due to diffing.
 
-NoSQL injection: some say [Mongoose schema typing are enough](https://zanon.io/posts/nosql-injection-in-mongodb). However, Mongoose [just calls toString() on the input](https://mongoosejs.com/docs/schematypes.html#usage-notes), which could be anything. I'm running [mongo-sanitize](https://www.npmjs.com/package/mongo-sanitize) just to be sure.
+__Validation__
+
+Mongoose reports validation errors that occur  in the subdocument twice: both on the child and on the parent schema. To opt out of duplicate errors, there is a schema option [`storeSubdocValidationError`](https://mongoosejs.com/docs/guide.html#storeSubdocValidationError). However, Typegoose [doesn't allow passing options to a subdocument](https://github.com/szokodiakos/typegoose/issues/227). The workaround is to check for error type:
+ - Normally the errors hash contains values of type `ValidatorError` (i.e. errors in the child or in the parent's own fields).
+ - Duplicate parent errors that echo errors in the child are of type `ValidationError` (i.e. the only case where a `ValidationError` entry appears in a `ValidationError` hash).
+
+__Sanitization__
+
+ NoSQL injection: some say [Mongoose schema typing are enough](https://zanon.io/posts/nosql-injection-in-mongodb). However, Mongoose [just calls toString() on the input](https://mongoosejs.com/docs/schematypes.html#usage-notes), which could be anything. I'm running [mongo-sanitize](https://www.npmjs.com/package/mongo-sanitize) just to be sure.
 
 ## Auth
 
 [JWT sub](https://tools.ietf.org/html/rfc7519#section-4.1.2) carries a user id from Mongo.
 
-Passport.js is a mess if I want to report errors by field.
+Passport.js is a mess if I want custom error handling.
 
 __Local strategy__
 

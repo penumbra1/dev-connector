@@ -1,7 +1,14 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
-import { arrayProp, plugin, prop, Ref, Typegoose } from "typegoose";
+import {
+  arrayProp,
+  plugin,
+  prop,
+  PropOptionsWithNumberValidate,
+  Ref,
+  Typegoose
+} from "typegoose";
 import uniqueValidator from "mongoose-unique-validator";
-
+import isURL from "validator/lib/isURL";
 import { User } from "./User";
 
 enum JobStatus {
@@ -12,21 +19,28 @@ enum JobStatus {
   LEAD = "Lead"
 }
 
+const urlValidator: PropOptionsWithNumberValidate = {
+  validate: {
+    validator: val => isURL(val),
+    message: `{VALUE} is not a valid URL.`
+  }
+};
+
 class Social extends Typegoose {
-  @prop()
+  @prop(urlValidator)
   youtube?: string;
 
-  @prop()
+  @prop(urlValidator)
   twitter?: string;
 
-  @prop()
+  @prop(urlValidator)
   facebook?: string;
 
-  @prop()
+  @prop(urlValidator)
   linkedin?: string;
 }
 
-class Job extends Typegoose {
+class Job {
   @prop({ required: true })
   title: string;
 
@@ -49,7 +63,7 @@ class Job extends Typegoose {
   description?: string;
 }
 
-class Degree extends Typegoose {
+class Degree {
   @prop({ required: true })
   degree: string;
 
@@ -80,7 +94,12 @@ class Profile extends Typegoose {
   @prop({ required: true, ref: User })
   user: Ref<User>;
 
-  @prop({ required: true, unique: true, maxlength: 40 })
+  @prop({
+    required: true,
+    unique: true,
+    minlength: [2, "Handle should be between 2 and 40 characters."],
+    maxlength: [40, "Handle should be between 2 and 40 characters."]
+  })
   handle: string;
 
   @arrayProp({ items: String })
@@ -104,16 +123,17 @@ class Profile extends Typegoose {
   @arrayProp({ items: Degree })
   education?: Degree[];
 
-  @prop()
+  @prop(urlValidator)
   website?: string;
 
-  @prop()
+  @prop(urlValidator)
   github?: string;
 
-  @arrayProp({ items: Social })
-  social?: Social[];
+  @prop({ _id: false })
+  social?: Social;
 }
 
 const ProfileModel = new Profile().getModelForClass(Profile);
+new Social().setModelForClass({ schemaOptions: { validateBeforeSave: false } });
 
 export default ProfileModel;

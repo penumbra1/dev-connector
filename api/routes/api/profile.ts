@@ -15,12 +15,14 @@ router.get("/test", (req, res) => res.json({ message: "Profile route works" }));
 // @desc Shows the current user profile
 // @access Private
 router.get("/", authenticator.jwt, (req, res, next) => {
-  ProfileModel.findOne({ user: req.user }).then(profile => {
-    if (!profile) {
-      return next(new ClientError("Profile not found"));
-    }
-    res.send(profile);
-  });
+  ProfileModel.findOne({ user: req.user })
+    .populate("user", ["name", "avatar"])
+    .then(profile => {
+      if (!profile) {
+        return next(new ClientError("No profile found for current user.", 404));
+      }
+      res.send(profile);
+    });
 });
 
 // @route POST api/profile/test
@@ -51,7 +53,10 @@ router.post("/", authenticator.jwt, async (req, res, next) => {
       // Create a new profile
       profile = await ProfileModel.create(profileData);
     }
-    res.json(profile);
+    const profileWithUserData = await profile
+      .populate({ path: "user", select: ["name", "avatar"] })
+      .execPopulate();
+    res.json(profileWithUserData);
   } catch (e) {
     next(e);
   }
