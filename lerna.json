@@ -1,7 +1,0 @@
-{
-  "packages": [
-    "client",
-    "api"
-  ],
-  "version": "independent"
-}
