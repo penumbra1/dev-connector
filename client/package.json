@@ -5,19 +5,21 @@
   "description": "A social network for developers",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production"
   },
   "author": "Olga Isakova",
   "license": "ISC",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^1.4.2",
-    "@typescript-eslint/parser": "^1.4.2",
-    "eslint": "^5.15.0",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-security": "^1.4.0",
-    "prettier": "^1.16.4",
+    "@types/react": "^16.8.6",
+    "@types/react-dom": "^16.8.2",
     "typescript": "^3.3.3333",
-    "webpack": "^4.29.6"
+    "prettier": "^1.16.4",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3"
   }
 }
