@@ -17,9 +17,9 @@
     "@babel/preset-typescript": "^7.3.3",
     "@types/react": "^16.8.6",
     "@types/react-dom": "^16.8.2",
+    "babel-loader": "^8.0.5",
     "clean-webpack-plugin": "^2.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "html-webpack-template": "^6.2.0",
+    "html-webpack-plugin": "^4.0.0-beta.5",
     "stylelint": "^9.10.1",
     "stylelint-config-recommended": "^2.1.0",
     "typescript": "^3.3.3333",
@@ -28,7 +28,8 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
-    "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "@babel/polyfill": "^7.2.5",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
   }
 }
