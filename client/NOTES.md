@@ -4,3 +4,4 @@ I'm using Typescript for type-checking only during development, and Babel for ev
 
 ## Ideas
  - Multiple tag select input for skills
+ - Pnpm recursive script to run dev on all folders
