@@ -14,6 +14,8 @@ module.exports = {
     }
   },
   extends: [
+    "eslint:recommended",
+    'plugin:react/recommended',
     "plugin:security/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier/@typescript-eslint", // overrides for @typescript-eslint/recommended
@@ -25,6 +27,8 @@ module.exports = {
     }
   },
   rules: {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/explicit-function-return-type": "off"
   }
 };
