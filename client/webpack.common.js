@@ -1,6 +1,6 @@
+const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   resolve: {
@@ -11,20 +11,14 @@ module.exports = {
       template: "./src/index.html"
       // Minify doesn't work?
     }),
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
-    }),
     new CleanWebpackPlugin()
   ],
   module: {
     rules: [
       {
         test: /\.css$/,
+        include: path.resolve(__dirname, "src"),
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader
-          },
           {
             loader: "css-loader",
             options: {
@@ -33,10 +27,23 @@ module.exports = {
           }
         ]
       },
+      // No CSS modules for dependencies (to avoid breaking Semantic UI)
+      {
+        test: /\.css$/,
+        include: path.resolve(__dirname, "../node_modules"),
+        use: ["css-loader"]
+      },
       {
         test: /\.(ts|js)x?$/,
         loader: "babel-loader",
         exclude: /node_modules/
+      },
+      {
+        test: /\.(png|jpg|svg|eot|ttf|woff|woff2)$/,
+        loader: "file-loader",
+        options: {
+          outputPath: "assets"
+        }
       }
     ]
   }

@@ -15,14 +15,15 @@
     "typescript": "^3.3.3333"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:all": "pnpm recursive run dev"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/penumbra1/dev-connector.git"
   },
   "author": "Olga Isakova",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/penumbra1/dev-connector/issues"
   },
