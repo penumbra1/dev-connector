@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "name": "dev-connector",
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@now/static-build"
+    },
+    {
+      "src": "api/**/*.ts",
+      "use": "@now/node@canary"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/server.ts"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/$1"
+    }
+  ],
+  "github": {
+    "enabled": false
+  },
+  "env": {
+    "IS_NOW": "true"
+  }
+}

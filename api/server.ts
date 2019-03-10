@@ -1,3 +1,4 @@
+/*eslint-disable no-console*/
 import express from "express";
 import mongoose from "mongoose";
 import helmet from "helmet";
@@ -42,5 +43,10 @@ app.use(clientErrorHandler);
 app.use(logger);
 app.use(serverErrorHandler);
 
-const { PORT } = process.env;
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+const { PORT, IS_NOW } = process.env;
+
+if (!IS_NOW) {
+  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+}
+
+export default app;
