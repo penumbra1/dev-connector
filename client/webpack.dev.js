@@ -12,7 +12,7 @@ module.exports = merge.smartStrategy({ "module.rules": "prepend" })(common, {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(c|le)ss$/,
         use: ["style-loader"]
       }
     ]

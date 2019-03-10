@@ -1,14 +1,19 @@
 {
     "presets": [
         ["@babel/env", {
-          "useBuiltIns": "entry",
-          "targets": "> 0.25%, not dead"
+          "useBuiltIns": "usage",
+          "targets": "> 0.25%, not dead",
+          "modules": false
           }
         ],
         "@babel/preset-react",
         "@babel/preset-typescript"
     ],
     "plugins": [
-        "@babel/proposal-class-properties"
+        "@babel/proposal-class-properties",
+        ["import", {
+            "libraryName": "antd",
+            "style": true
+        }]
     ]
 }

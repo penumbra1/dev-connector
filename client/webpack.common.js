@@ -1,37 +1,49 @@
 const path = require("path");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 module.exports = {
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"]
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    alias: {
+      "@ant-design/icons/lib/dist$": path.resolve(__dirname, "./src/icons.js")
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html"
-      // Minify doesn't work?
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false
+    })
   ],
   module: {
     rules: [
       {
         test: /\.css$/,
-        include: path.resolve(__dirname, "src"),
         use: [
           {
-            loader: "css-loader",
-            options: {
-              modules: true
-            }
+            loader: "css-loader"
+            // options: {
+            //   modules: true
+            // }
           }
         ]
       },
-      // No CSS modules for dependencies (to avoid breaking Semantic UI)
       {
-        test: /\.css$/,
-        include: path.resolve(__dirname, "../node_modules"),
-        use: ["css-loader"]
+        test: /\.less$/,
+        use: [
+          "css-loader",
+          {
+            loader: "less-loader",
+            options: {
+              javascriptEnabled: true
+            }
+          }
+        ]
       },
       {
         test: /\.(ts|js)x?$/,
