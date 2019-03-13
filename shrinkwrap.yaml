@@ -25,11 +25,11 @@ importers:
       bcryptjs: 2.4.3
       dotenv: 6.2.0
       express: 4.16.4
-      helmet: 3.15.1
+      helmet: 3.16.0
       jsonwebtoken: 8.5.0
       mongo-sanitize: 1.0.1
-      mongoose: /mongoose/5.4.17/mongoose@5.4.17
-      mongoose-unique-validator: /mongoose-unique-validator/2.0.2/mongoose@5.4.17
+      mongoose: /mongoose/5.4.18/mongoose@5.4.18
+      mongoose-unique-validator: /mongoose-unique-validator/2.0.2/mongoose@5.4.18
       passport: 0.4.0
       passport-jwt: 4.0.0
       passport-local: 1.0.0
@@ -39,24 +39,24 @@ importers:
       '@types/express': 4.16.1
       '@types/helmet': 0.0.43
       '@types/jsonwebtoken': 8.3.2
-      '@types/mongo-sanitize': 1.0.0
+      '@types/mongo-sanitize': 1.0.1
       '@types/mongoose': 5.3.21
       '@types/mongoose-unique-validator': 1.0.1
-      '@types/node': 11.10.5
+      '@types/node': 11.11.0
       '@types/passport': 1.0.0
       '@types/passport-jwt': 3.0.1
       '@types/passport-local': 1.0.33
       '@types/validator': 10.9.0
       reflect-metadata: 0.1.13
       ts-node-dev: /ts-node-dev/1.0.0-pre.32/typescript@3.3.3333
-      typegoose: /typegoose/5.6.0/mongoose@5.4.17
+      typegoose: /typegoose/5.6.0/mongoose@5.4.18
       typescript: 3.3.3333
     specifiers:
       '@types/bcryptjs': ^2.4.2
       '@types/express': ^4.16.1
       '@types/helmet': ^0.0.43
       '@types/jsonwebtoken': ^8.3.0
-      '@types/mongo-sanitize': ^1.0.0
+      '@types/mongo-sanitize': ^1.0.1
       '@types/mongoose': ^5.3.20
       '@types/mongoose-unique-validator': ^1.0.1
       '@types/node': ^11.10.4
@@ -1017,19 +1017,19 @@ packages:
   /@types/body-parser/1.17.0:
     dependencies:
       '@types/connect': 3.4.32
-      '@types/node': 11.10.5
+      '@types/node': 11.11.0
     dev: true
     resolution:
       integrity: sha512-a2+YeUjPkztKJu5aIF2yArYFQQp8d51wZ7DavSHjFuY1mqVgidGyzEQ41JIVNy82fXj8yPgy2vJmfIywgESW6w==
   /@types/bson/4.0.0:
     dependencies:
-      '@types/node': 11.10.5
+      '@types/node': 11.11.0
     dev: true
     resolution:
       integrity: sha512-pq/rqJwJWkbS10crsG5bgnrisL8pML79KlMKQMoQwLUjlPAkrUHMvHJ3oGwE7WHR61Lv/nadMwXVAD2b+fpD8Q==
   /@types/connect/3.4.32:
     dependencies:
-      '@types/node': 11.10.5
+      '@types/node': 11.11.0
     dev: true
     resolution:
       integrity: sha512-4r8qa0quOvh7lGD0pre62CAb1oni1OO6ecJLGCezTmhQ8Fz50Arx9RUszryR8KlgK6avuSXvviL6yWyViQABOg==
@@ -1039,7 +1039,7 @@ packages:
       integrity: sha512-EaObqwIvayI5a8dCzhFrjKzVwKLxjoG9T6Ppd5CEo07LRKfQ8Yokw54r5+Wq7FaBQ+yXRvQAYPrHwya1/UFt9g==
   /@types/express-serve-static-core/4.16.1:
     dependencies:
-      '@types/node': 11.10.5
+      '@types/node': 11.11.0
       '@types/range-parser': 1.2.3
     dev: true
     resolution:
@@ -1056,7 +1056,7 @@ packages:
     dependencies:
       '@types/events': 3.0.0
       '@types/minimatch': 3.0.3
-      '@types/node': 11.10.5
+      '@types/node': 11.11.0
     dev: true
     resolution:
       integrity: sha512-1Bh06cbWJUHMC97acuD6UMG29nMt0Aqz1vF3guLfG+kHHJhy3AyohZFFxYk2f7Q1SQIrNwvncxAE0N/9s70F2w==
@@ -1068,7 +1068,7 @@ packages:
       integrity: sha512-45cU1ZW3L6ZxPQzAB597nl7OfUr14ceUWaQRoiByGFAjZlCQRvaEFC4Vv84lLWsFCYVWLU+raz+bIHrVBNTdRw==
   /@types/jsonwebtoken/8.3.2:
     dependencies:
-      '@types/node': 11.10.5
+      '@types/node': 11.11.0
     dev: true
     resolution:
       integrity: sha512-Mkjljd9DTpkPlrmGfTJvcP4aBU7yO2QmW7wNVhV4/6AEUxYoacqU7FJU/N0yFEHTsIrE4da3rUrjrR5ejicFmA==
@@ -1080,17 +1080,17 @@ packages:
     dev: true
     resolution:
       integrity: sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
-  /@types/mongo-sanitize/1.0.0:
+  /@types/mongo-sanitize/1.0.1:
     dev: true
     resolution:
-      integrity: sha512-ylsl8KmgPqHSg8xN3S0wg2PGSYDyMtGAn0u8WwUUE+MYYP6QFHYw6OSn8EMKTIdyHoZG8ymnEdjd7hQ77duKtg==
-  /@types/mongodb/3.1.21:
+      integrity: sha512-xh7/jNaerAu4rlOoGd+2S0D+rSbQyni58+uSuNbay0ynIaifKZBOKPRMY7Ti/ekqaX8IqX4XAbkq2uMZKpdiig==
+  /@types/mongodb/3.1.22:
     dependencies:
       '@types/bson': 4.0.0
-      '@types/node': 11.10.5
+      '@types/node': 11.11.0
     dev: true
     resolution:
-      integrity: sha512-V1W/OFjUdz8xeVetg37eF1tpC+4y60YAn5pgB1pGW58oxNwNw/gU/k7EaUFXTVUTwKS6Ot6Ui6xEm60ZD4zCAg==
+      integrity: sha512-hvNR0txBlJJAy1eZOeIDshW4dnQaC694COou4eHHaMdIcteCfoCQATD7sYNlXxNxfTc1iIbHUi7A8CAhQe08uA==
   /@types/mongoose-unique-validator/1.0.1:
     dependencies:
       '@types/mongoose': 5.3.21
@@ -1099,15 +1099,15 @@ packages:
       integrity: sha512-FI8tlxl7Hv6t7JSCq1sf3MqCpwcEZVmRUVwbPBDud0G0Gx6Hr30g93h/uOXh1u24D/r//JnIZu0cPaepcNpc2Q==
   /@types/mongoose/5.3.21:
     dependencies:
-      '@types/mongodb': 3.1.21
-      '@types/node': 11.10.5
+      '@types/mongodb': 3.1.22
+      '@types/node': 11.11.0
     dev: true
     resolution:
       integrity: sha512-Cfx8f9TW+tkxVIkZXsDTWrbsECxrIItlbykNDXNsrNhee85v79YRFkCf1wvn+vlcHL/eEO8gjSRSZ+9Hf9jMnw==
-  /@types/node/11.10.5:
+  /@types/node/11.11.0:
     dev: true
     resolution:
-      integrity: sha512-DuIRlQbX4K+d5I+GMnv+UfnGh+ist0RdlvOp+JZ7ePJ6KQONCFQv/gKYSU1ZzbVdFSUCKZOltjmpFAGGv5MdYA==
+      integrity: sha512-D5Rt+HXgEywr3RQJcGlZUCTCx1qVbCZpVk3/tOOA6spLNZdGm8BU+zRgdRYDoF1pO3RuXLxADzMrF903JlQXqg==
   /@types/passport-jwt/3.0.1:
     dependencies:
       '@types/express': 4.16.1
@@ -1191,14 +1191,14 @@ packages:
       integrity: sha512-mf0VpXk+NoTmkUmuJCsdwBYxjYZW41amCSzd4t/fABMKl+qGMViwFP0pR7ukFdZRXWI1LIkca3VIbXVBmWZ4kQ==
   /@types/vfile-message/1.0.1:
     dependencies:
-      '@types/node': 11.10.5
+      '@types/node': 11.11.0
       '@types/unist': 2.0.3
     dev: true
     resolution:
       integrity: sha512-mlGER3Aqmq7bqR1tTTIVHq8KSAFFRyGbrxuM8C/H82g6k7r2fS+IMEkIu3D7JHzG10NvPdR8DNx0jr0pwpp4dA==
   /@types/vfile/3.0.2:
     dependencies:
-      '@types/node': 11.10.5
+      '@types/node': 11.11.0
       '@types/unist': 2.0.3
       '@types/vfile-message': 1.0.1
     dev: true
@@ -1209,7 +1209,7 @@ packages:
       '@typescript-eslint/parser': 1.4.2
       '@typescript-eslint/typescript-estree': 1.4.2
       requireindex: 1.2.0
-      tsutils: 3.8.0
+      tsutils: 3.9.0
     dev: true
     engines:
       node: ^6.14.0 || ^8.10.0 || >=9.10.0
@@ -1744,7 +1744,7 @@ packages:
   /autoprefixer/9.4.10:
     dependencies:
       browserslist: 4.4.2
-      caniuse-lite: 1.0.30000942
+      caniuse-lite: 1.0.30000943
       normalize-range: 0.1.2
       num2fraction: 1.2.2
       postcss: 7.0.14
@@ -1983,18 +1983,18 @@ packages:
       integrity: sha512-Z942RysHXmJrhqk88FmKBVq/v5tqmSkDz7p54G/MGyjMnCFFnC79XWNbg+Vta8W6Wb2qtSZTSxIGkJrRpCFEiA==
   /browserslist/4.4.2:
     dependencies:
-      caniuse-lite: 1.0.30000942
+      caniuse-lite: 1.0.30000943
       electron-to-chromium: 1.3.113
-      node-releases: 1.1.9
+      node-releases: 1.1.10
     dev: true
     hasBin: true
     resolution:
       integrity: sha512-ISS/AIAiHERJ3d45Fz0AVYKkgcy+F/eJHzKEvv1j0wwKGKD9T3BrwKr/5g45L+Y4XIK5PlTqefHciRFcfE1Jxg==
-  /bson/1.1.0:
+  /bson/1.1.1:
     engines:
       node: '>=0.6.19'
     resolution:
-      integrity: sha512-9Aeai9TacfNtWXOYarkFJRW2CWo+dRon+fuLZYJmvLV3+MiUp0bEI6IAZfXEIg7/Pl/7IWlLaDnhzTsD81etQA==
+      integrity: sha512-jCGVYLoYMHDkOsbwJZBCqwMHyH4c+wzgI9hG7Z6SZJRXWr+x58pdIbm2i9a/jFGCkRJqRUr8eoI7lDWa0hTkxg==
   /buffer-equal-constant-time/1.0.1:
     dev: false
     resolution:
@@ -2146,16 +2146,16 @@ packages:
   /caniuse-api/3.0.0:
     dependencies:
       browserslist: 4.4.2
-      caniuse-lite: 1.0.30000942
+      caniuse-lite: 1.0.30000943
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
     resolution:
       integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==
-  /caniuse-lite/1.0.30000942:
+  /caniuse-lite/1.0.30000943:
     dev: true
     resolution:
-      integrity: sha512-wLf+IhZUy2rfz48tc40OH7jHjXjnvDFEYqBHluINs/6MgzoNLPf25zhE4NOVzqxLKndf+hau81sAW0RcGHIaBQ==
+      integrity: sha512-nJMjU4UaesbOHTcmz6VS+qaog++Fdepg4KAya5DL/AZrL/aaAZDGOOQ0AECtsJa09r4cJBdHZMive5mw8lnQ5A==
   /cardinal/2.1.1:
     dependencies:
       ansicolors: 0.3.2
@@ -4266,7 +4266,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-sCHwywg4daQ2mY0YYwXSZRsgcCeerUwxMwNixGA7aMLkVmPTYBl7gJoZDHOZyXkqPrtuDT3s2B1A+RLI7WxSdQ==
-  /helmet/3.15.1:
+  /helmet/3.16.0:
     dependencies:
       depd: 2.0.0
       dns-prefetch-control: 0.1.0
@@ -4278,16 +4278,16 @@ packages:
       helmet-csp: 2.7.1
       hide-powered-by: 1.0.0
       hpkp: 2.0.0
-      hsts: 2.1.0
-      ienoopen: 1.0.0
+      hsts: 2.2.0
+      ienoopen: 1.1.0
       nocache: 2.0.0
       referrer-policy: 1.1.0
       x-xss-protection: 1.1.0
     dev: false
     engines:
-      node: '>= 0.10.0'
+      node: '>=4.0.0'
     resolution:
-      integrity: sha512-hgoNe/sjKlKNvJ3g9Gz149H14BjMMWOCmW/DTXl7IfyKGtIK37GePwZrHNfr4aPXdKVyXcTj26RgRFbPKDy9lw==
+      integrity: sha512-rsTKRogc5OYGlvSHuq5QsmOsOzF6uDoMqpfh+Np8r23+QxDq+SUx90Rf8HyIKQVl7H6NswZEwfcykinbAeZ6UQ==
   /hex-color-regex/1.1.0:
     dev: true
     resolution:
@@ -4353,10 +4353,14 @@ packages:
     dev: true
     resolution:
       integrity: sha1-wc56MWjIxmFAM6S194d/OyJfnDg=
-  /hsts/2.1.0:
+  /hsts/2.2.0:
+    dependencies:
+      depd: 2.0.0
     dev: false
+    engines:
+      node: '>=4.0.0'
     resolution:
-      integrity: sha512-zXhh/DqgrTXJ7erTN6Fh5k/xjMhDGXCqdYN3wvxUvGUQvnxcFfUd8E+6vLg/nk3ss1TYMb+DhRl25fYABioTvA==
+      integrity: sha512-ToaTnQ2TbJkochoVcdXYm4HOCliNozlviNsg+X2XQLQvZNI/kCHR9rZxVYpJB3UPcHz80PgxRyWQ7PdU1r+VBQ==
   /html-comment-regex/1.1.2:
     dev: true
     resolution:
@@ -4501,10 +4505,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-GguP+DRY+pJ3soyIiGPTvdiVXjZ+DbXOxGpXn3eMvNW4x4irjqXm4wHKscC+TfxSJ0yw/S1F24tqdMNsMZTiLA==
-  /ienoopen/1.0.0:
+  /ienoopen/1.1.0:
     dev: false
+    engines:
+      node: '>=4.0.0'
     resolution:
-      integrity: sha1-NGpCj0dKrI9QzzeE6i0PFvYr2ms=
+      integrity: sha512-MFs36e/ca6ohEKtinTJ5VvAJ6oDRAYFdYXweUnGY9L9vcoqFOU4n2ZhmJ0C4z/cwGZ3YIQRSB3XZ1+ghZkY5NQ==
   /iferr/0.1.5:
     dev: true
     resolution:
@@ -5873,7 +5879,7 @@ packages:
       integrity: sha512-y18QHyoQomBPdv48F0pJfBByZXql056fcj+5cPZt9MbpR+d1kKaGYQ3tiKE3bZLWDHBuMr5djhlxGO0vEMp2/A==
   /mongodb-core/3.1.11:
     dependencies:
-      bson: 1.1.0
+      bson: 1.1.1
       require_optional: 1.0.1
       safe-buffer: 5.1.2
     optionalDependencies:
@@ -5888,33 +5894,33 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-sz2dhvBZQWf3LRNDhbd30KHVzdjZx9IKC0L+kSZ/gzYquCF5zPOgGqRz6sSCqYZtKP2ekB4nfLxhGtzGHnIKxA==
-  /mongoose-legacy-pluralize/1.0.2/mongoose@5.4.17:
+  /mongoose-legacy-pluralize/1.0.2/mongoose@5.4.18:
     dependencies:
-      mongoose: /mongoose/5.4.17/mongoose@5.4.17
+      mongoose: /mongoose/5.4.18/mongoose@5.4.18
     id: registry.npmjs.org/mongoose-legacy-pluralize/1.0.2
     peerDependencies:
       mongoose: '*'
     resolution:
       integrity: sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
-  /mongoose-unique-validator/2.0.2/mongoose@5.4.17:
+  /mongoose-unique-validator/2.0.2/mongoose@5.4.18:
     dependencies:
       lodash.foreach: 4.5.0
       lodash.get: 4.4.2
-      mongoose: /mongoose/5.4.17/mongoose@5.4.17
+      mongoose: /mongoose/5.4.18/mongoose@5.4.18
     dev: false
     id: registry.npmjs.org/mongoose-unique-validator/2.0.2
     peerDependencies:
       mongoose: ^5.2.1
     resolution:
       integrity: sha512-gbKFiEzWQi8wZvZFeeEkx4nCV1qWaeRoQBNm+672+h54/0u/Y8rSdNubScn/1H2ScCPO55asDow+OXq67RQDmg==
-  /mongoose/5.4.17/mongoose@5.4.17:
+  /mongoose/5.4.18/mongoose@5.4.18:
     dependencies:
       async: 2.6.1
-      bson: 1.1.0
+      bson: 1.1.1
       kareem: 2.3.0
       mongodb: 3.1.13
       mongodb-core: 3.1.11
-      mongoose-legacy-pluralize: /mongoose-legacy-pluralize/1.0.2/mongoose@5.4.17
+      mongoose-legacy-pluralize: /mongoose-legacy-pluralize/1.0.2/mongoose@5.4.18
       mpath: 0.5.1
       mquery: 3.2.0
       ms: 2.1.1
@@ -5923,9 +5929,9 @@ packages:
       sliced: 1.0.1
     engines:
       node: '>=4.0.0'
-    id: registry.npmjs.org/mongoose/5.4.17
+    id: registry.npmjs.org/mongoose/5.4.18
     resolution:
-      integrity: sha512-9aAg8M0YUmGHQRDYvsKJ02wx/Qaof1Jn2iDH21ZtWGAZpQt9uVLNEOdcBuzi+lPJwGbLYh2dphdKX0sZ+dXAJQ==
+      integrity: sha512-yiSd/1OYYfK9EuH6NFO/NnTD4AZPIpRY1i58xUssgCGsYDX3qEYcdgFeknB5OArMB1Ny3wwMW8xiip2I5pgszw==
   /move-concurrently/1.0.1:
     dependencies:
       aproba: 1.2.0
@@ -6087,12 +6093,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha1-BW0UJE89zBzq3+aK+c/wxUc6M/M=
-  /node-releases/1.1.9:
+  /node-releases/1.1.10:
     dependencies:
       semver: 5.6.0
     dev: true
     resolution:
-      integrity: sha512-oic3GT4OtbWWKfRolz5Syw0Xus0KRFxeorLNj0s93ofX6PWyuzKjsiGxsCtWktBwwmTF6DdRRf2KreGqeOk5KA==
+      integrity: sha512-KbUPCpfoBvb3oBkej9+nrU0/7xPlVhmhhUJ1PZqwIP5/1dJkRWKWD3OONjo6M2J7tSCBtDCumLwwqeI+DWWaLQ==
   /normalize-package-data/2.5.0:
     dependencies:
       hosted-git-info: 2.7.1
@@ -8943,7 +8949,7 @@ packages:
       schema-utils: 1.0.0
       serialize-javascript: 1.6.1
       source-map: 0.6.1
-      terser: 3.16.1
+      terser: 3.17.0
       webpack: /webpack/4.29.6/webpack@4.29.6
       webpack-sources: 1.3.0
       worker-farm: 1.6.0
@@ -8955,9 +8961,9 @@ packages:
       webpack: ^4.0.0
     resolution:
       integrity: sha512-GOK7q85oAb/5kE12fMuLdn2btOS9OBZn4VsecpHDywoUC/jLhSAKOiYo0ezx7ss2EXPMzyEWFoE0s1WLE+4+oA==
-  /terser/3.16.1:
+  /terser/3.17.0:
     dependencies:
-      commander: 2.17.1
+      commander: 2.19.0
       source-map: 0.6.1
       source-map-support: 0.5.10
     dev: true
@@ -8965,7 +8971,7 @@ packages:
       node: '>=6.0.0'
     hasBin: true
     resolution:
-      integrity: sha512-JDJjgleBROeek2iBcSNzOHLKsB/MdDf+E/BOAJ0Tk9r7p9/fVobfv7LMJ/g/k3v9SXdmjZnIlFd5nfn/Rt0Xow==
+      integrity: sha512-/FQzzPJmCpjAH9Xvk2paiWrFq+5M6aVOf+2KRbwhByISDX/EujxsK+BAvrhb6H+2rtrLCHK9N01wO014vrIwVQ==
   /text-table/0.2.0:
     dev: true
     resolution:
@@ -9144,7 +9150,7 @@ packages:
     dev: true
     resolution:
       integrity: sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
-  /tsutils/3.8.0:
+  /tsutils/3.9.0:
     dependencies:
       tslib: 1.9.3
     dev: true
@@ -9153,7 +9159,7 @@ packages:
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev'
     resolution:
-      integrity: sha512-XQdPhgcoTbCD8baXC38PQ0vpTZ8T3YrE+vR66YIj/xvDt1//8iAhafpIT/4DmvzzC1QFapEImERu48Pa01dIUA==
+      integrity: sha512-XSrxkIRB/7YPWfqgGgkl5YHlzZqmq3NQzb36s+GD7TdYMVvmWqWQyUCzuT7tqnoPoTIBQ+npTNgl9ymgyhfR4Q==
   /tty-browserify/0.0.0:
     dev: true
     resolution:
@@ -9190,9 +9196,9 @@ packages:
     dev: true
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-  /typegoose/5.6.0/mongoose@5.4.17:
+  /typegoose/5.6.0/mongoose@5.4.18:
     dependencies:
-      mongoose: /mongoose/5.4.17/mongoose@5.4.17
+      mongoose: /mongoose/5.4.18/mongoose@5.4.18
       reflect-metadata: 0.1.13
     dev: true
     id: registry.npmjs.org/typegoose/5.6.0

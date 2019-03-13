@@ -104,6 +104,7 @@ function logger(
   next: NextFunction
 ): void {
   if (!(err instanceof ClientError)) {
+    // eslint-disable-next-line no-console
     console.error(err);
   }
   next(err);

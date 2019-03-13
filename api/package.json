@@ -5,8 +5,8 @@
   "description": "A social network for developers",
   "main": "dist/server.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpileOnly --require dotenv/config ./server.ts",
-    "build": "npx tsc"
+    "dev": "ts-node-dev --respawn --transpileOnly --require dotenv/config ./src/server.ts",
+    "build": "npx tsc --outDir ./dist"
   },
   "author": "Olga Isakova",
   "license": "MIT",
@@ -29,7 +29,7 @@
     "@types/express": "^4.16.1",
     "@types/helmet": "^0.0.43",
     "@types/jsonwebtoken": "^8.3.0",
-    "@types/mongo-sanitize": "^1.0.0",
+    "@types/mongo-sanitize": "^1.0.1",
     "@types/mongoose": "^5.3.20",
     "@types/mongoose-unique-validator": "^1.0.1",
     "@types/node": "^11.10.4",

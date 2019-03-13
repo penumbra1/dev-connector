@@ -7,13 +7,13 @@
       "use": "@now/static-build"
     },
     {
-      "src": "api/**/*.ts",
+      "src": "api/src/**/*.ts",
       "use": "@now/node@canary"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
+      "src": "/api/.*",
       "dest": "/api/server.ts"
     },
     {
@@ -23,6 +23,11 @@
   ],
   "github": {
     "enabled": false
+  },
+  "build": {
+    "env": {
+      "IS_NOW": "true"
+    }
   },
   "env": {
     "IS_NOW": "true"

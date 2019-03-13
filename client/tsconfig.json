@@ -63,6 +63,6 @@
   "exclude": [
     "node_modules",
     "dist",
-    "webpack.common.js"
+    "webpack.*.js"
   ]
 }

@@ -16,10 +16,11 @@ module.exports = {
       template: "./src/index.html"
     }),
     new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin({
-      openAnalyzer: false
-    })
-  ],
+    !process.env.IS_NOW &&
+      new BundleAnalyzerPlugin({
+        openAnalyzer: false
+      })
+  ].filter(Boolean),
   module: {
     rules: [
       {

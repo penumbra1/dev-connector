@@ -9,10 +9,10 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "check-types": "tsc",
+    "check-types": "npx tsc",
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --config webpack.dev.js",
-    "now-build": "npm run build"
+    "now-build": "npm run check-types && npm run build"
   },
   "author": "Olga Isakova",
   "license": "MIT",
