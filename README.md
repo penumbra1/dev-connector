@@ -1,3 +1,6 @@
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/penumbra1/dev-connector.svg)](https://greenkeeper.io/)
+
 A social network for devs written in Node and React + Typescript.
 
 My additions to the [original](https://github.com/bradtraversy/devconnector):
